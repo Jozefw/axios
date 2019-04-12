@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ajax</title>
+</head>
+<body>
+    <h1>Ajax Galore</h1>
+    <div id="output"></div>
+    <button id="clickMe">Click Here</button>
+    <form action="" id="myform">
+        First Name: <input type="text" name="first" value="Jericho"></br>
+        Last Name: <input type="text" name="last" value="Kitty"></br>
+        <input type="submit" value="Submit Data">
+       
+    </form>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var myform = document.getElementById('myform');
+        myform.addEventListener('submit',function(e){
+            e.preventDefault();
+
+            console.log('submitted');
+            var url = 'https://randomuser.me/api/';
+            axios.get(url)
+            .then(function(response){
+                var people = response.data.results;
+                console.log(people);
+                var output = '';
+                for(var x = 0; x<people.length; x++){
+                    output+= '<h2>' + people[x].name.first + ' ' + people[x].name.last +'</h2></br>';
+
+                }
+                document.querySelector("#output").innerHTML = output;
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+            .then(function(){
+
+            });
+        });
+       var first = document.querySelector('input[name="first"]');
+       var first = document.querySelector('input[name="last"]');
+        
+    </script>
+    
+</body>
+</html>
