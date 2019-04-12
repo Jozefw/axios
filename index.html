@@ -10,20 +10,33 @@
     <h1>Ajax Galore</h1>
     <div id="output"></div>
     <button id="clickMe">Click Here</button>
+    <form action="" id="myform">
+        First Name: <input type="text" name="first" value="Jericho"></br>
+        Last Name: <input type="text" name="last" value="Kitty"></br>
+        <input type="submit" value="Submit Data">
+       
+    </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        $('#clickMe').on('click',webData);
-        function webData(){
-            var url = 'https://jsonplaceholder.typicode.com/posts/1';
-            $.get(url,output)
-           .done(output)
-           .fail(function(){
-            console.log("Error!...big time!")
-           })
-        }
-        function output(data){
-            $('#output').html('<h2>'+data.title+'</h2>'+'<p>'+data.body+'</p>');
-        }
+        $('#myform').on('submit',function(e){
+    
+            e.preventDefault();
+            var first = $('input[name="first"]').val();
+            var last = $('input[name="last"]').val();
+            var url ="http://s179017901.onlinehome.us/discoveryvip/";
+            console.log(first,last);
+            var theData = {
+                first:first,
+                last:last
+            };
+            $.post(url,theData)
+            .done(function(data){
+                console.log(data);
+            })
+           
+        });
+        
+        
     
     </script>
     
